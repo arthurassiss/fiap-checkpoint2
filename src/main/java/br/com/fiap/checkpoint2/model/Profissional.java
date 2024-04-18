@@ -1,8 +1,7 @@
-package model;
+package br.com.fiap.checkpoint2.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -11,9 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "consultas")
-public class Consulta extends AbstractEntity<Long>{
-	
+@Table(name = "profissionais")
+public class Profissional extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 50)
 	private String nome;
 	
@@ -30,5 +28,4 @@ public class Consulta extends AbstractEntity<Long>{
 	@Column(nullable = false)
 	@CreationTimestamp
 	private Timestamp updated_at;
-	
 }
