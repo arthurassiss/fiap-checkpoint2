@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,11 +22,9 @@ public class Profissional extends AbstractEntity<Long> {
 	@Column(nullable = false)
 	private BigDecimal valor_hora;
 	
-	@Column(nullable = false)
 	@CreationTimestamp
 	private Timestamp created_at;
 	
-	@Column(nullable = false)
-	@CreationTimestamp
+	@UpdateTimestamp
 	private Timestamp updated_at;
 }
