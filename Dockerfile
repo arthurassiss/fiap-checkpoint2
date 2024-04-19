@@ -1,15 +1,23 @@
-FROM maven:3.8.7-openjdk-18-slim
+FROM maven:3.8.7-openjdk-18-slim AS build
 
-RUN mkdir /opt/checkpoint2
+RUN mkdir /opt/app
 
-COPY . /opt/checkpoint2
+COPY . /opt/app
 
-WORKDIR /opt/checkpoint2
+WORKDIR /opt/app
 
 RUN mvn clean package
+
+FROM eclipse-temurin:18-jre-alpine
+
+RUN mkdir /opt/app
+
+COPY --from=build  /opt/app/target/app.jar /opt/app/app.jar
+
+WORKDIR /opt/app
 
 ENV PROFILE=dev
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}","-jar", "target/app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-jar", "app.jar"]
